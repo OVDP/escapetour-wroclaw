@@ -1,0 +1,26 @@
+:root { --bg:#f3faf5; --bg-soft:#fff; --panel:#fff; --card:#fff; --line:#c8e5d3; --text:#163c2b; --muted:#4d705e; --accent:#007b3d; --accent-strong:#006b35; --orange:#007b3d; --green:#007b3d; }
+* { box-sizing:border-box; }
+body { margin:0; min-height:100vh; background:radial-gradient(circle at top right,#d9f3df,transparent 45%),#f3faf5; color:#163c2b; font-family:"Avenir Next","Trebuchet MS","Segoe UI",sans-serif; line-height:1.6; }
+.standalone { max-width:760px; margin:6vh auto; padding:16px; }
+.card { background:#fff; border:1px solid #c8e5d3; border-radius:18px; padding:24px; box-shadow:0 8px 28px #006b350a; }
+h1,h2,h3 { color:#006b35; line-height:1.25; }
+a { color:#006b35; }
+.eyebrow { color:#007b3d; font-size:.8rem; letter-spacing:.12em; font-weight:800; }
+.muted { color:#4d705e; }
+label { display:block; font-weight:700; }
+input,select,textarea { width:100%; border:1px solid #b8d9c6; border-radius:10px; padding:12px; margin:6px 0 16px; font:inherit; color:#163c2b; background:#fff; }
+input[type=hidden] { display:none; }
+.btn,button[type=submit]:not(.btn-danger):not(.btn-secondary),#test-location { display:inline-block; background:#007b3d; color:white; padding:12px 20px; border:0; border-radius:10px; font:inherit; font-weight:700; text-decoration:none; cursor:pointer; }
+.btn-secondary { display:inline-block; background:#e5f5e9; border:1px solid #b8d9c6; color:#005a2d; border-radius:10px; padding:10px 16px; text-decoration:none; font:inherit; font-weight:700; cursor:pointer; }
+.btn-danger { background:#354b40; color:white; }
+button:disabled { opacity:.5; cursor:not-allowed; }
+:focus-visible { outline:3px solid #007b3d; outline-offset:3px; }
+.sidebar { background:#006b35; border-color:#006b35; }
+.sidebar h1,.sidebar a { color:white; }
+.sidebar a:hover { background:#ffffff20; color:white; }
+.bar span { background:#007b3d; }
+.bad,.alert-error,.warning { color:#a72335; }
+.alert-error { background:#fff1f1; border-color:#efb3b3; }
+.pending-badge { background:#dcf5e4; color:#005a2d; border-color:#b8d9c6; }
+.callout,.sort-badge { background:#e5f5e9; color:#005a2d; border-color:#b8d9c6; }
+@media(max-width:600px) { .standalone { margin:16px auto; } .card { padding:20px; } h1 { font-size:30px; } }

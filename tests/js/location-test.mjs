@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {distanceMeters, assessLocation} from '../../public/js/location-test.mjs';
+assert.equal(distanceMeters(52,5,52,5),0);
+assert.ok(Math.abs(distanceMeters(0,0,0,1)-111195)<1);
+assert.equal(assessLocation(20,10),'inside');
+assert.equal(assessLocation(150,20),'outside');
+assert.equal(assessLocation(95,20),'uncertain');
+assert.equal(assessLocation(105,20),'uncertain');
+assert.equal(assessLocation(0,200),'uncertain');
+assert.equal(assessLocation(10,NaN),'unknown');
+console.log('GPS-afstand en onzekerheidsgrenzen: 8 controles geslaagd.');

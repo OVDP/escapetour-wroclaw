@@ -1,0 +1,151 @@
+[
+  {
+    "number": 1,
+    "title": "01 · Krasnal WOTuś",
+    "question_text": "Deze zaak kunnen jullie niet alleen oplossen. Gelukkig zijn er in Wroclaw genoeg kabouters die goed bevriend zijn met de kikker en jullie graag willen helpen. Hun leider is hier ergens in de buurt.\n\nZoek naar de kabouter generaal en scan de QR-code bij zijn voeten. Dit zal jullie leiden naar een artikel dat begint met een getal in de titel. Stuur ons dit getal.",
+    "latitude": 51.111268098363155,
+    "longitude": 17.03027640953402,
+    "correct_answer": "16",
+    "acceptable_answers": [],
+    "manual_approval": false,
+    "question_image": null,
+    "review_notes": ""
+  },
+  {
+    "number": 2,
+    "title": "02 · Rzeźba krokodyla",
+    "question_text": "Het nieuws over de ontvoering van de Zabka kikker heeft zich snel verspreid. Toen de University Spar ervan te horen kreeg, is de Spar krokodil direct gekomen om te helpen. Maar het ziet ernaar uit dat hij is aangevallen en vastgebonden. Gelukkig heeft een toeschouwer de schaduw van de dader kunnen fotograferen. De dader kan niet ver gevlucht zijn.\n\nVind de dader en stuur ons een selfie met hen (dat zal voor veel likes zorgen op de gram).",
+    "latitude": 51.11287404693253,
+    "longitude": 17.034564889021564,
+    "correct_answer": null,
+    "acceptable_answers": [],
+    "manual_approval": true,
+    "question_image": "images/brainstorm/image10.png",
+    "review_notes": "Selfie met de libelle bij de krokodil."
+  },
+  {
+    "number": 3,
+    "title": "03 · Sculpture of the Nave",
+    "question_text": "Het Biedronka lieveheersbeestje heeft hulp ingeschakeld van een groot zeemonster. Gelukkig is deze uitgeschakeld. Hier ligt de ribbenkast  van dit grote monster. De policja vond dit papiertje in bezit van het zeemonster samen met een kluis die een viercijferige code heeft. Misschien helpt het papiertje met het uitvogelen van de code.\n\nLos de puzzel op en stuur ons de code.",
+    "latitude": 51.11425277479009,
+    "longitude": 17.038664378357485,
+    "correct_answer": "8235",
+    "acceptable_answers": [],
+    "manual_approval": false,
+    "question_image": "images/brainstorm/image5.png",
+    "review_notes": ""
+  },
+  {
+    "number": 4,
+    "title": "04 · Pomnik kardynała Bolesława Kominka",
+    "question_text": "Tijdens de ontvoering kwam Biedronka langs deze locatie. De policja heeft een papiertje gevonden met een cryptische code erop. Misschien zal het oplossen van deze code helpen in de zaak tegen Biedronka en het vinden van de Zabka kikker.\n\nLos deze code op en stuur ons het resultaat.",
+    "latitude": 51.11508595981551,
+    "longitude": 17.041451371888318,
+    "correct_answer": "code dict",
+    "acceptable_answers": [
+      "code dict"
+    ],
+    "manual_approval": false,
+    "question_image": "images/brainstorm/image8.png",
+    "review_notes": "De voorbeeldcode in de brainstorm geeft: code dict."
+  },
+  {
+    "number": 5,
+    "title": "05 · Hala Targowa",
+    "question_text": "Deze markthal was de hideout van Het Biedronka lieveheersbeestje. Er wordt verwacht dat dit de plek is waar de Zabka kikker gevangen wordt gehouden, maar niemand kan hem vinden. Aangezien het een oude hal is, is er misschien een vergeten ruimte. Om de plattegrond van het gebouw te vinden moeten we weten hoe oud het is.\n\nIn welk jaartal is de markthal geopend? Dit is ergens op het gebouw te vinden. Google is niet toegestaan.",
+    "latitude": 51.11279986807703,
+    "longitude": 17.039651086734462,
+    "correct_answer": "1908",
+    "acceptable_answers": [],
+    "manual_approval": false,
+    "question_image": null,
+    "review_notes": "De uitgewerkte vraag vraagt naar 1908. De voortgangstabel noemt een andere, niet uitgewerkte opdracht over dieren op de gevel."
+  },
+  {
+    "number": 6,
+    "title": "06 · Rzeźba — de motor",
+    "question_text": "Na de ontvoering van de Zabka kikker is Biedronka gevlucht op een vrij excentriek voertuig. Gerucht gaat dat dit voertuig hier ergens in de buurt is achtergelaten.\n\nVind het voertuig en maak een foto waarop jullie uitbeelden hoe Biedronka op dit voertuig de Zabka kikker ontvoerde.",
+    "latitude": 51.11153352725808,
+    "longitude": 17.04443119811699,
+    "correct_answer": null,
+    "acceptable_answers": [],
+    "manual_approval": true,
+    "question_image": null,
+    "review_notes": "Foto bij het motorbeeld waarop de ontvoering wordt uitgebeeld."
+  },
+  {
+    "number": 7,
+    "title": "07 · Brama Oławska",
+    "question_text": "Het Biedronka lieveheersbeestje heeft zich erg goed voorbereid op de ontvoering. Elk details was tot in de puntjes uitgewerkt. De policja verwacht dat hij een model heeft gebruikt om alles uit te denken. Ze hebben een document in handen gekregen dat de indruk wekt dat dit model hier in de buurt moet zijn. Vind de vierletterige code met behulp van dit document.",
+    "latitude": 51.10756428317998,
+    "longitude": 17.040661540904004,
+    "correct_answer": "BFRW",
+    "acceptable_answers": [],
+    "manual_approval": false,
+    "question_image": "images/brainstorm/image1.png",
+    "review_notes": ""
+  },
+  {
+    "number": 8,
+    "title": "08 · Bastion Sakwowy",
+    "question_text": "Deze plek werd vaak bezocht door het Biedronka lieveheersbeestje. Dit is waarschijnlijk de plek waar Biedronka de hele ontvoering heeft gepland. Misschien is hier informatie te vinden die zal helpen met het redden van de Zabka kikker.\n\nWat is het aantal hoge bogen dat langs de fontein staat maal honderd plus het aantal lantaarnpalen boven op het bastion?",
+    "latitude": 51.10490040014359,
+    "longitude": 17.03815660299115,
+    "correct_answer": "1926",
+    "acceptable_answers": [
+      "1926",
+      "1924"
+    ],
+    "manual_approval": false,
+    "question_image": null,
+    "review_notes": "Brainstorm noemt 1926 of 1924; beide worden geaccepteerd."
+  },
+  {
+    "number": 9,
+    "title": "09 · Nicolaus Copernicus Park",
+    "question_text": "Biedronka is een groot liefhebber van dans. Tijdens de ontvoering werd hij hier afgeleid, waardoor het de Zabka kikker bijna lukte om te ontsnappen. Misschien helpt het vinden van deze afleiding bij het oplossen van de ontvoering.\n\nErgens in dit park binnen een straal van 100 meter staat een standbeeld dat een bekend balletstuk uitbeeldt. Maak een selfie met dit beeld en geef de naam van het balletstuk.",
+    "latitude": 51.10457813036214,
+    "longitude": 17.0341453751445,
+    "correct_answer": "Het Zwanenmeer",
+    "acceptable_answers": [],
+    "manual_approval": true,
+    "question_image": null,
+    "review_notes": "Selfie met het balletbeeld én de naam Het Zwanenmeer."
+  },
+  {
+    "number": 10,
+    "title": "10 · Orfeusz",
+    "question_text": "De detective van de policja is een groot standbeeld van een hoofd. De detective was druk bezig met het oplossen van de zaak tot er een poep in zijn haar heeft gevogeld. Hierna is de detective geragequit. Vind de detective en tel hoeveel gouden vogels er in zijn haar zitten zodat we hem weer kunnen overtuigen om terug te komen.\n\nHoeveel gouden vogels zitten er in het haar van het standbeeld?",
+    "latitude": 51.106613253185984,
+    "longitude": 17.028170302573628,
+    "correct_answer": "8",
+    "acceptable_answers": [],
+    "manual_approval": false,
+    "question_image": null,
+    "review_notes": ""
+  },
+  {
+    "number": 11,
+    "title": "11 · Small Iglica — Plac Solny",
+    "question_text": "Dit is de locatie waar de Zabka kikker ontvoerd is. De policja heeft een papiertje gevonden dat vermoedelijk is achtergelaten door het Biedronka lieveheersbeestje. Het oplossen van de puzzel zal mogelijk helpen met het oplossen van deze zaak.\n\nSta bij het beeld in het midden van het plein, kijk naar het westen en geef ons het antwoord met behulp van het plaatje.",
+    "latitude": 51.10943208327534,
+    "longitude": 17.029421086709746,
+    "correct_answer": "Markt",
+    "acceptable_answers": [],
+    "manual_approval": false,
+    "question_image": "images/brainstorm/image2.png",
+    "review_notes": ""
+  },
+  {
+    "number": 12,
+    "title": "12 · Marktplein — klokkentoren",
+    "question_text": "Biedronka was goed bevriend met de standbeelden op het marktplein. Er wordt verwacht dat de standbeelden op de klokkentoren hun wapens hebben uitgeleend aan het lieveheersbeestje. Na het ontvoeren van de Zabka kikker zijn de wapens aan de standbeelden teruggegeven. Vind deze standbeelden en identificeer welk wapen ze vast hebben.\n\nWelk wapen hebben de standbeelden op de klokkentoren op het marktplein vast?",
+    "latitude": 51.110219678064794,
+    "longitude": 17.03076307548807,
+    "correct_answer": "Speer",
+    "acceptable_answers": [],
+    "manual_approval": false,
+    "question_image": null,
+    "review_notes": ""
+  }
+]
