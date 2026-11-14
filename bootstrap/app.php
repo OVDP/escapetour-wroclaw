@@ -22,5 +22,15 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->respond(function (\Symfony\Component\HttpFoundation\Response $response) {
+            $request = request();
+            if ($response->getStatusCode() === 404
+                && in_array($request->method(), ['GET', 'HEAD'], true)
+                && ! $request->expectsJson()
+                && $request->path() !== '/') {
+                return redirect()->route('landing');
+            }
+
+            return $response;
+        });
     })->create();
