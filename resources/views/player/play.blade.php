@@ -536,7 +536,7 @@
 </div>
 
 <script type="module">
-import {getFreshPosition, gpsErrorMessage} from @json(asset('js/gps.mjs').'?v='.filemtime(public_path('js/gps.mjs')));
+import {getFreshPosition, gpsErrorMessage} from @json(asset('js/gps.js').'?v='.filemtime(public_path('js/gps.js')));
 (() => {
     const isTaskMode = {{ request()->boolean('task') ? 'true' : 'false' }};
     const shareBtn = document.getElementById('share-location-btn');

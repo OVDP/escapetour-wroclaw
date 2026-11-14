@@ -88,3 +88,5 @@ php artisan view:cache
 Laad bij een nieuwe installatie de opdrachten met `php artisan db:seed --class=WroclawSeeder --force`. Laat de webserver naar `public` wijzen en geef PHP schrijfrechten op `storage` en `bootstrap/cache`. Serveer productie via de webserver, niet via `artisan serve`.
 
 De locatietestmodus en skiproute zijn volledig verwijderd. Ook oude skips in browsersessies geven geen toegang meer. Iedere vraag vereist echte GPS-bevestiging binnen de ingestelde straal. De gehoste telefoonmeting moet nog op jouw draaiende server worden gecontroleerd.
+
+De browser-GPS-module staat in `public/js/gps.js`. Serveer dit bestand als `text/javascript` of `application/javascript`; bij `application/octet-stream` blokkeren browsers de module en werken de GPS-knoppen niet.

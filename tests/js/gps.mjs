@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {getFreshPosition, gpsErrorMessage} from '../../public/js/gps.mjs';
+import {getFreshPosition, gpsErrorMessage} from '../../public/js/gps.js';
 await assert.rejects(getFreshPosition({isSecureContext:false}), /HTTPS/);
 await assert.rejects(getFreshPosition({isSecureContext:true,navigator:{}}), /ondersteunt/);
 await assert.rejects(getFreshPosition({isSecureContext:true,navigator:{geolocation:{}},document:{permissionsPolicy:{allowsFeature:()=>false}}}), /serverinstellingen/);
