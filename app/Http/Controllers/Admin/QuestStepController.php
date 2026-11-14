@@ -110,12 +110,8 @@ class QuestStepController extends Controller
             'timeout_seconds' => (int) ($validated['timeout_seconds'] ?? 30),
             'cooldown_seconds' => (int) ($validated['timeout_seconds'] ?? 30),
             'reward_story_text' => $validated['reward_story_text'] ?? null,
-            'reward_letter' => isset($validated['reward_letter']) && $validated['reward_letter'] !== ''
-                ? mb_substr((string) $validated['reward_letter'], 0, 1)
-                : null,
-            'reward_suspect_name' => isset($validated['reward_suspect_name']) && trim((string) $validated['reward_suspect_name']) !== ''
-                ? trim((string) $validated['reward_suspect_name'])
-                : null,
+            'reward_letter' => null,
+            'reward_suspect_name' => null,
             'requires_location' => $requiresStartLocation,
             'start_location_lat' => $requiresStartLocation ? ($validated['start_location_lat'] ?? null) : null,
             'start_location_lng' => $requiresStartLocation ? ($validated['start_location_lng'] ?? null) : null,
@@ -126,7 +122,7 @@ class QuestStepController extends Controller
             'location_lng' => $questionType === 'location_submit' ? ($validated['location_lng'] ?? null) : null,
             'location_address' => $questionType === 'location_submit' ? $this->compactAddress($validated['location_address'] ?? null) : null,
             'location_radius_meters' => $questionType === 'location_submit' ? ($validated['location_radius_meters'] ?? null) : null,
-            'accepts_whatsapp_upload' => $request->boolean('accepts_whatsapp_upload'),
+            'accepts_whatsapp_upload' => false,
             'location_submission_required' => $questionType === 'location_submit',
             'multiple_choice_json' => $questionType === 'multiple_choice' ? $multipleChoiceOptions : null,
             'correct_choice' => $questionType === 'multiple_choice' ? $correctChoice : null,

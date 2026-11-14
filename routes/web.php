@@ -9,7 +9,6 @@ use App\Http\Controllers\Player\PlayController;
 use App\Http\Controllers\PlayerLandingController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/locatie-test', 'player.location-test')->name('location.test');
 
 Route::post('/groepen', [\App\Http\Controllers\Player\GroupRegistrationController::class, 'store'])->name('groups.register');
 Route::get('/', [PlayerLandingController::class, 'index'])->name('landing');

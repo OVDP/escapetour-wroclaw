@@ -24,6 +24,7 @@ class WroclawSeeder extends Seeder {
                 $step = QuestStep::updateOrCreate(['game_id' => $game->id, 'title' => $item['title']], [
                     'question_text' => $item['question_text'], 'correct_answer' => $item['correct_answer'],
                     'acceptable_answers' => $item['acceptable_answers'], 'question_image' => $item['question_image'],
+                    'review_on_mismatch' => $item['review_on_mismatch'] ?? false,
                     'review_notes' => $item['review_notes'], 'manual_approval' => $item['manual_approval'],
                     'step_type' => $item['manual_approval'] ? 'photo_upload' : 'text_answer',
                     'question_type' => in_array($item['number'], [1,3,5,8,10]) ? 'numeric' : 'direct',

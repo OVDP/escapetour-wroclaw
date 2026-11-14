@@ -30,9 +30,6 @@ class UpsertQuestStepRequest extends FormRequest
             'manual_approval' => ['nullable', 'boolean'],
             'timeout_seconds' => ['nullable', 'integer', 'min:1', 'max:3600'],
             'reward_story_text' => ['nullable', 'string'],
-            'reward_letter' => ['nullable', 'string', 'max:10'],
-            'reward_suspect_name' => ['nullable', 'string', 'max:255'],
-            'accepts_whatsapp_upload' => ['nullable', 'boolean'],
 
             'requires_location' => ['nullable', 'boolean'],
             'start_location_lat' => [Rule::requiredIf($requiresStartLocation), 'nullable', 'numeric'],

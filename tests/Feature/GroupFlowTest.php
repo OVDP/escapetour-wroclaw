@@ -67,6 +67,9 @@ class GroupFlowTest extends TestCase {
         $route = GameRoute::first();
         $step = $route->questSteps->first();
         $this->post('/join/'.$route->join_token);
+        $this->withSession(['location_test_skip'=>['group'=>$route->id,'step'=>$step->id,'order'=>1]]);
+        $this->post('/play/location/skip')->assertNotFound();
+        $this->get('/play?task=1')->assertDontSee('Locatie overslaan')->assertDontSee($step->question_text);
         $this->postJson('/play/location', ['latitude'=>52, 'longitude'=>5])->assertOk();
         $this->postJson('/play/location/lock')->assertUnprocessable();
         $this->get('/play?task=1')->assertDontSee($step->question_text);

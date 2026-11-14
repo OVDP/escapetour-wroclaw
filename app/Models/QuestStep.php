@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class QuestStep extends Model
 {
     protected $fillable = [
+        'review_on_mismatch',
         'game_id',
         'question_image', 'acceptable_answers', 'review_notes',
         'title',
@@ -48,6 +49,7 @@ class QuestStep extends Model
 
     protected $casts = [
         'acceptable_answers' => 'array',
+        'review_on_mismatch' => 'boolean',
         'requires_location' => 'boolean',
         'manual_approval_required' => 'boolean',
         'manual_approval' => 'boolean',

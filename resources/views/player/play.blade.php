@@ -394,7 +394,7 @@
                     <p id="location-status" role="status">Deel je locatie en bevestig die zodra je dichtbij bent.</p>
                     <p>Afstand tot locatie: <strong id="distance-meters">{{ $distanceMeters !== null ? $distanceMeters.' meter' : 'onbekend' }}</strong></p>
                     <p id="radius-state" class="{{ $isInRadius ? 'ok' : 'bad' }}">{{ $isInRadius ? 'Binnen radius' : 'Buiten radius' }}</p>
-                    <button id="lock-location-btn" type="button" class="btn" {{ $isInRadius ? '' : 'disabled' }}>
+                    <button id="lock-location-btn" type="button" class="btn">
                         {{ $locationLocked ? 'Locatie bevestigd' : 'Bevestig locatie' }}
                     </button>
                 </div>
@@ -404,6 +404,8 @@
                 </div>
             @else
                 <div class="card task-card">
+                    <button id="share-location-btn" class="btn-secondary" type="button">GPS vernieuwen</button>
+                    <p id="location-status" role="status">Je locatie is bevestigd. Vernieuw je GPS als je langer met de opdracht bezig bent.</p>
                     <p style="margin-top:0;"><strong>Vraag:</strong><br>{{ $currentStep->question_text ?: '-' }}</p>
                     @if($currentStep->question_image)
                         <a href="{{ asset($currentStep->question_image) }}" target="_blank" rel="noopener">
@@ -419,14 +421,6 @@
 
                     @if($questionType === 'location_submit')
                         <p class="muted">Gebruik de aanwijzingen in de opdracht en dien daarna je huidige locatie in.</p>
-                    @endif
-
-                    @if($currentStep->accepts_whatsapp_upload)
-                        <p>
-                            <a class="btn-secondary" href="https://wa.me/31640997119?text={{ urlencode('Inzending opdracht: '.$currentStep->title.' - groep '.$group->name) }}" target="_blank" rel="noopener noreferrer">
-                                Verstuur beeldmateriaal via WhatsApp
-                            </a>
-                        </p>
                     @endif
 
                     @if($latestPendingSubmission)
@@ -456,7 +450,7 @@
                                 <label for="answer_text">Jouw numerieke antwoord</label>
                                 <input id="answer_text" name="answer_text" type="number" step="any" inputmode="decimal" placeholder="Vul een getal in" value="{{ old('answer_text') }}">
                             @else
-                                <label for="answer_text">Jouw antwoord</label>
+                                <label for="answer_text">{{ $currentStep->step_type === 'photo_upload' ? 'Toelichting (optioneel)' : 'Jouw antwoord' }}</label>
                                 <textarea id="answer_text" name="answer_text" rows="4" placeholder="Typ hier je antwoord...">{{ old('answer_text') }}</textarea>
                             @endif
                             <button type="submit" id="submit-answer-btn" class="btn" {{ $activeTimeout ? 'disabled' : '' }}>Verstuur antwoord</button>
@@ -503,52 +497,10 @@
         </div>
         <div id="location-required-card" class="card" style="{{ $locationEnabled ? 'display:none;' : '' }}">
             <h3>Locatie aanzetten</h3>
-            <p><a href="{{ route('location.test') }}">Test je GPS-locatie in Utrecht</a></p>
             <p class="muted">Deel je locatie zodat de spelleiding jullie kan volgen. Gebruik de navigatielink bij elke opdracht.</p>
             <button class="btn-secondary" id="share-location-btn" type="button">Locatie aanzetten</button>
             <p style="margin-top:10px;"><span id="location-enabled-pill" class="pill">{{ $locationEnabled ? 'Locatie aan' : 'Locatie uit' }}</span></p>
             <p id="location-status" class="muted" style="margin-top: 10px;"></p>
-        </div>
-
-        @if($isFinished && $hiddenLettersCount > 0)
-            <div class="card">
-                <h3>Letters</h3>
-                @if(!empty($visibleLetters))
-                    <p class="ok">Alle letters zijn nu zichtbaar:</p>
-                    <p style="font-size:24px; font-weight:700; letter-spacing:.16em;">{{ implode('', $visibleLetters) }}</p>
-                    <p class="muted">Deze letters vormen samen het eindwoord naar de locatie van de Żabka-kikker.</p>
-                @else
-                    <p><strong>Aantal verzamelde letters:</strong> {{ $hiddenLettersCount }}</p>
-                @endif
-            </div>
-        @endif
-
-        <div class="grid-2">
-            <div class="card">
-                <h3>Vrijgespeelde verhaallijn</h3>
-                @if(empty($storyEntries))
-                    <p class="muted">Nog geen verhaallijnfragmenten vrijgespeeld.</p>
-                @else
-                    <ul>
-                        @foreach($storyEntries as $entry)
-                            <li><strong>{{ $entry['title'] ?? 'Opdracht' }}:</strong> {{ $entry['story'] ?? '' }}</li>
-                        @endforeach
-                    </ul>
-                @endif
-            </div>
-
-            @if(!$isFinished && $hiddenLettersCount > 0)
-                <div class="card">
-                    <h3>Letters</h3>
-                    @if(!empty($visibleLetters))
-                        <p class="ok">Alle letters zijn nu zichtbaar:</p>
-                        <p style="font-size:24px; font-weight:700; letter-spacing:.16em;">{{ implode('', $visibleLetters) }}</p>
-                        <p class="muted">Deze letters vormen samen het eindwoord naar de locatie van de Żabka-kikker.</p>
-                    @else
-                        <p><strong>Aantal verzamelde letters:</strong> {{ $hiddenLettersCount }}</p>
-                    @endif
-                </div>
-            @endif
         </div>
 
         @if($messages->isNotEmpty())
@@ -583,7 +535,8 @@
     </div>
 </div>
 
-<script>
+<script type="module">
+import {getFreshPosition, gpsErrorMessage} from @json(asset('js/gps.mjs').'?v='.filemtime(public_path('js/gps.mjs')));
 (() => {
     const isTaskMode = {{ request()->boolean('task') ? 'true' : 'false' }};
     const shareBtn = document.getElementById('share-location-btn');
@@ -631,7 +584,7 @@
             locationEnabledPillEl.textContent = enabled ? 'Locatie aan' : 'Locatie uit';
             locationEnabledPillEl.className = `pill ${enabled ? 'ok' : ''}`;
         }
-        if (locationRequiredCardEl) locationRequiredCardEl.style.display = enabled ? 'none' : 'block';
+        if (locationRequiredCardEl) locationRequiredCardEl.style.display = isFinished ? 'none' : 'block';
         if (locationSubtleStatusEl) locationSubtleStatusEl.style.display = enabled ? 'block' : 'none';
     };
 
@@ -666,70 +619,64 @@
 
     applyTimeoutState(localTimeoutRemaining);
 
-    const postLocation = (lat, lng) => fetch('{{ route('play.location') }}', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-        },
-        body: JSON.stringify({ latitude: lat, longitude: lng }),
-    }).then((r) => {
-        if (r.status === 401) {
-            window.location.href = '{{ route('landing') }}';
-            return { ok: false };
-        }
-        return r.json();
-    });
-
-    const refreshGeo = (silent = false) => {
-        if (!navigator.geolocation) {
-            if (!silent) setStatus('Geolocatie wordt niet ondersteund.', true);
-            return;
-        }
-
-        navigator.geolocation.getCurrentPosition((pos) => {
-            postLocation(pos.coords.latitude, pos.coords.longitude)
-                .then((data) => {
-                    setLocationEnabled(!!data.ok);
-                    if (!silent) setStatus(data.ok ? 'Locatie staat aan.' : 'Locatie aanzetten mislukt.', !data.ok);
-                })
-                .catch(() => {
-                    setLocationEnabled(false);
-                    if (!silent) setStatus('Locatie aanzetten mislukt.', true);
-                });
-        }, () => {
-            setLocationEnabled(false);
-            if (!silent) setStatus('Toestemming voor locatie geweigerd.', true);
-        }, {
-            enableHighAccuracy: true,
-            maximumAge: 0,
-            timeout: 15000,
+    const jsonRequest = async (url, payload = null) => {
+        const response = await fetch(url, {
+            method: 'POST', credentials: 'same-origin',
+            headers: {'Content-Type':'application/json', 'Accept':'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}'},
+            body: payload === null ? null : JSON.stringify(payload),
         });
+        if (response.status === 401 || response.status === 419) throw new Error('Je sessie is verlopen. Ververs de pagina en open je groep opnieuw.');
+        let data;
+        try { data = await response.json(); } catch { throw new Error('De server gaf geen geldig antwoord. Controleer de serverinstellingen.'); }
+        if (!response.ok || !data.ok) throw new Error(data.message || 'Locatie opslaan mislukt. Probeer opnieuw.');
+        return data;
     };
-
-    shareBtn?.addEventListener('click', () => refreshGeo(false));
-    refreshGeo(true);
-    setInterval(() => refreshGeo(true), 8000);
-
-    lockBtn?.addEventListener('click', () => {
-        if (!navigator.geolocation) { setStatus('Je browser ondersteunt geen GPS.', true); return; }
-        lockBtn.disabled = true;
-        navigator.geolocation.getCurrentPosition(async (pos) => {
-            try {
-                await postLocation(pos.coords.latitude, pos.coords.longitude);
-                const response = await fetch('{{ route('play.location.lock') }}', {
-                    method: 'POST', headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json' },
-                });
-                const data = await response.json();
-                if (data.ok) { window.location.reload(); return; }
-                setStatus(data.message || 'Locatie bevestigen mislukt.', true);
-            } catch { setStatus('Locatie bevestigen mislukt. Probeer opnieuw.', true); }
-            lockBtn.disabled = false;
-        }, () => { lockBtn.disabled = false; setStatus('Locatie niet beschikbaar. Geef GPS-toestemming en probeer opnieuw.', true); }, {enableHighAccuracy:true, maximumAge:0, timeout:15000});
+    const postLocation = (lat, lng) => jsonRequest(@json(route('play.location', [], false)), {latitude:lat, longitude:lng});
+    let geoBusy = false;
+    let trackingEnabled = false;
+    const refreshGeo = async (confirm = false) => {
+        if (geoBusy || isFinished) return;
+        geoBusy = true;
+        if (shareBtn) shareBtn.disabled = true;
+        if (lockBtn) lockBtn.disabled = true;
+        setStatus('GPS-locatie ophalen… Dit kan maximaal 25 seconden duren.');
+        try {
+            const position = await getFreshPosition();
+            await postLocation(position.coords.latitude, position.coords.longitude);
+            trackingEnabled = true;
+            setLocationEnabled(true);
+            setStatus(`Locatie opgeslagen. GPS-nauwkeurigheid: ±${Math.ceil(position.coords.accuracy)} meter.`);
+            if (confirm) {
+                await jsonRequest(@json(route('play.location.lock', [], false)));
+                window.location.reload();
+            }
+        } catch (error) {
+            trackingEnabled = false;
+            setLocationEnabled(false);
+            setStatus(gpsErrorMessage(error), true);
+        } finally {
+            geoBusy = false;
+            if (shareBtn) shareBtn.disabled = false;
+            if (lockBtn) lockBtn.disabled = false;
+        }
+    };
+    if (!isFinished && navigator.permissions?.query) {
+        navigator.permissions.query({name:'geolocation'}).then(permission => {
+            if (permission.state === 'granted') refreshGeo();
+        }).catch(() => {});
+    }
+    shareBtn?.addEventListener('click', () => refreshGeo());
+    lockBtn?.addEventListener('click', () => refreshGeo(true));
+    // Start permissions from an explicit tap; resume updates only after consent.
+    setInterval(() => {
+        if (trackingEnabled && document.visibilityState === 'visible') refreshGeo();
+    }, 20000);
+    document.addEventListener('visibilitychange', () => {
+        if (trackingEnabled && document.visibilityState === 'visible') refreshGeo();
     });
 
     const pollLive = () => {
-        fetch('{{ route('play.live') }}')
+        fetch('{{ route('play.live', [], false) }}')
             .then((r) => {
                 if (r.status === 401) {
                     window.location.href = '{{ route('landing') }}';
@@ -749,7 +696,7 @@
                     radiusStateEl.className = data.is_in_radius ? 'ok' : 'bad';
                 }
                 if (lockBtn && !data.location_locked) {
-                    lockBtn.disabled = !data.is_in_radius;
+                    lockBtn.disabled = geoBusy;
                 }
 
                 if (typeof data.remaining_timeout_seconds !== 'undefined') {
@@ -780,7 +727,7 @@
     setInterval(pollLive, 3000);
 
     const tickTimeout = () => {
-        fetch('{{ route('play.timeout.tick') }}', {
+        fetch('{{ route('play.timeout.tick', [], false) }}', {
             method: 'POST',
             headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
         })
@@ -793,7 +740,7 @@
     };
 
     const pauseTimeout = () => {
-        fetch('{{ route('play.timeout.pause') }}', {
+        fetch('{{ route('play.timeout.pause', [], false) }}', {
             method: 'POST',
             headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
         }).catch(() => {});
@@ -815,26 +762,16 @@
         if (event.target === popupEl) popupEl.classList.remove('show');
     });
 
-    taskSubmitFormEl?.addEventListener('submit', (event) => {
+    taskSubmitFormEl?.addEventListener('submit', async (event) => {
         if (taskQuestionType !== 'location_submit') return;
-
         event.preventDefault();
-        if (!navigator.geolocation) {
-            setStatus('Geolocatie wordt niet ondersteund.', true);
-            return;
-        }
-
-        navigator.geolocation.getCurrentPosition((pos) => {
+        try {
+            const pos = await getFreshPosition();
+            await postLocation(pos.coords.latitude, pos.coords.longitude);
             if (submitLatEl) submitLatEl.value = String(pos.coords.latitude);
             if (submitLngEl) submitLngEl.value = String(pos.coords.longitude);
             taskSubmitFormEl.submit();
-        }, () => {
-            setStatus('Locatie kon niet worden opgehaald. Zet locatie aan en probeer opnieuw.', true);
-        }, {
-            enableHighAccuracy: true,
-            maximumAge: 0,
-            timeout: 12000,
-        });
+        } catch (error) { setStatus(gpsErrorMessage(error), true); }
     });
 
     const runConfettiRain = () => {

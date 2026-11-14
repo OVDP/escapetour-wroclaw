@@ -12,6 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $proxies = array_filter(array_map('trim', explode(',', (string) env('TRUSTED_PROXIES', ''))));
+        if ($proxies) {
+            $middleware->trustProxies(at: array_values($proxies));
+        }
         $middleware->web(append: [\App\Http\Middleware\IdentifyPlayerDevice::class]);
         $middleware->alias([
             'admin.auth' => AdminAuthenticated::class,

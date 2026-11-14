@@ -17,5 +17,4 @@
 <button class="btn" type="submit">Groep aanmaken</button></form>
 <p class="muted">Je kunt in deze browser één groep aanmaken. Bewaar je browsercookies om je groep terug te vinden.</p>
 @else<p>Er is nog geen spel geopend. Meld je bij de spelleiding.</p>@endif
-<p><a href="{{ route('location.test') }}">Test je GPS-locatie in Utrecht</a></p>
 </div></main></body></html>

@@ -24,7 +24,7 @@ class AdminLoginController extends Controller
             'passphrase' => ['required', 'string'],
         ]);
 
-        $expectedPassphrase = (string) env('ADMIN_PASSPHRASE', '');
+        $expectedPassphrase = (string) config('auth.admin_passphrase', '');
 
         if ($expectedPassphrase === '' || ! hash_equals($expectedPassphrase, $validated['passphrase'])) {
             return back()

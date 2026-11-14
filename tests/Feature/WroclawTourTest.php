@@ -27,14 +27,14 @@ class WroclawTourTest extends TestCase {
             $this->withSession(['admin_authenticated'=>true])->get('/admin/quest-steps/'.$step->id)->assertOk();
             if ($step->step_type === 'photo_upload') {
                 $this->post('/play/submit', ['answer_text'=>'Het Zwanenmeer'])->assertSessionHasErrors('photo');
-                $this->post('/play/submit', ['answer_text'=>'Het Zwanenmeer', 'photo'=>UploadedFile::fake()->image('selfie.jpg')])->assertSessionHasNoErrors();
+                $this->post('/play/submit', ['photo'=>UploadedFile::fake()->image('selfie.jpg')])->assertSessionHasNoErrors();
                 $submission = StepSubmission::latest('id')->first();
                 $this->assertEquals('pending', $submission->status);
                 Storage::disk('local')->assertExists($submission->photo_path);
                 $this->get('/admin/goedkeuringen')->assertOk()->assertSee('Bekijk foto');
                 $this->post('/admin/routes/'.$route->id.'/submissions/'.$submission->id.'/approve')->assertSessionHasNoErrors();
             } else {
-                $answer = $step->correct_answer === '1926' ? '1924' : strtolower($step->correct_answer);
+                $answer = $step->correct_answer === '1926' ? '1924' : $step->correct_answer;
                 $this->post('/play/submit', ['answer_text'=>$answer])->assertSessionHasNoErrors();
             }
             $this->assertEquals($step->pivot->sort_order + 1, $route->progress()->first()->current_sort_order);

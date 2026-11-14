@@ -8,7 +8,7 @@ Admin: http://127.0.0.1:8000/admin. Het lokale wachtwoord staat bij `ADMIN_PASSP
 De 12 locaties, vragen, coördinaten en antwoorden staan in `database/data/wroclaw.json`.
 De inhoud is overgenomen uit brainstorm.docx. De route loopt van Krasnal WOTuś via de 12 opdrachten terug naar het startpunt. Navigatie is beschikbaar per opdracht. De vraag verschijnt pas na bevestiging van een recente GPS-locatie binnen 100 meter.
 
-- Opdrachten 2, 6 en 9 vereisen een foto met toelichting. De spelleiding keurt deze goed onder Goedkeuringen. Bij 9 moet ook Het Zwanenmeer worden genoemd.
+- Opdrachten 2 en 6 vereisen een foto; een toelichting is optioneel. De spelleiding keurt de foto goed onder Goedkeuringen. Opdracht 9 gebruikt tekstinvoer met het antwoord Het Zwanenmeer. Bij opdrachten 4, 9 en 12 gaat een exact gelijk antwoord direct door; afwijkende antwoorden worden door de spelleiding beoordeeld.
 - Spelers zien alleen de puzzelafbeeldingen. Referentieafbeeldingen met oplossingen staan privé in `storage/app/private/brainstorm`.
 - Opdracht 4 gebruikt `code dict`, overeenkomstig de voorbeelduitvoer in het document.
 - Opdracht 5 gebruikt de uitgewerkte vraag over het openingsjaar (1908). De voortgangstabel noemt een afwijkend idee over de dieren op de gevel; dit staat als beheerdersnotitie bij de opdracht.

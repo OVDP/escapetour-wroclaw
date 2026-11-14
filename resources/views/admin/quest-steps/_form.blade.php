@@ -47,10 +47,9 @@
     Handmatige goedkeuring
 </label>
 
-<label style="display:flex; align-items:center; gap:10px; margin-top: 12px;">
-    <input type="checkbox" name="accepts_whatsapp_upload" value="1" @checked(old('accepts_whatsapp_upload', $quest_step?->accepts_whatsapp_upload ?? false)) style="width:auto; margin:0;">
-    Materiaalinzending via WhatsApp toelaten
-</label>
+@if($quest_step?->review_on_mismatch)
+<p>Een exact gelijk antwoord gaat automatisch door. Afwijkende antwoorden worden door de spelleiding beoordeeld.</p>
+@endif
 
 <label>Timeout bij fout antwoord (seconden)</label>
 <input type="number" name="timeout_seconds" min="1" max="3600" value="{{ old('timeout_seconds', $quest_step?->timeout_seconds ?? $quest_step?->cooldown_seconds ?? 30) }}">
@@ -60,12 +59,6 @@
 
 <label>Beloning: verhaallijntekst</label>
 <textarea name="reward_story_text" rows="4">{{ old('reward_story_text', $quest_step?->reward_story_text ?? $quest_step?->clue_reveal_text ?? '') }}</textarea>
-
-<label>Beloning: letter</label>
-<input type="text" name="reward_letter" maxlength="1" value="{{ old('reward_letter', $quest_step?->reward_letter ?? '') }}">
-
-<label>Beloning: verdachte vrijspelen</label>
-<input type="text" name="reward_suspect_name" value="{{ old('reward_suspect_name', $quest_step?->reward_suspect_name ?? '') }}" placeholder="Bijv. Hofmaarschalk Van Doren">
 
 <hr style="border-color:var(--line); margin: 24px 0;">
 <h2 style="font-size: 18px;">Locatie-instellingen</h2>

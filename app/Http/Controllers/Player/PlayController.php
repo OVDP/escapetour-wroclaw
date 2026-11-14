@@ -225,6 +225,16 @@ class PlayController extends Controller
             return back()->withErrors(['location' => 'Ga naar de locatie en bevestig eerst je actuele GPS-locatie.']);
         }
 
+        if ($pendingForCurrentStep) {
+            return back()->with('success', 'Je inzending wacht al op goedkeuring van de spelleiding.');
+        }
+        if ($currentStep->review_on_mismatch) {
+            if ($answerText === '') {
+                return back()->withErrors(['answer' => 'Vul een antwoord in.']);
+            }
+            $manualReview = $answerText !== (string) $currentStep->correct_answer;
+        }
+
         if ($manualReview) {
             if ($pendingForCurrentStep) {
                 return back()->with('success', 'Je inzending is al verstuurd en wacht op goedkeuring van de spelleiding.');
@@ -232,9 +242,6 @@ class PlayController extends Controller
 
             if ($currentStep->step_type === 'photo_upload' && ! $request->hasFile('photo')) {
                 return back()->withErrors(['photo' => 'Voeg een foto toe voor deze opdracht.'])->withInput();
-            }
-            if ($answerText === '' && $currentStep->step_type === 'photo_upload') {
-                return back()->withErrors(['answer_text' => 'Voeg een toelichting toe; bij het ballet ook de naam.'])->withInput();
             }
             StepSubmission::create([
                 'photo_path' => $request->hasFile('photo') ? $request->file('photo')->store('submissions', 'local') : null,

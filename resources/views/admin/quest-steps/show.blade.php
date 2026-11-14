@@ -24,7 +24,6 @@
         @endif
         <p><strong>Timeout bij fout antwoord:</strong> {{ $quest_step->timeout_seconds ?? 30 }} seconden</p>
         <p><strong>Handmatige goedkeuring:</strong> {{ $quest_step->manual_approval ? 'Ja' : 'Nee' }}</p>
-        <p><strong>WhatsApp inzending:</strong> {{ $quest_step->accepts_whatsapp_upload ? 'Ja' : 'Nee' }}</p>
         <p><strong>Beloning verhaallijn:</strong><br>{{ $quest_step->reward_story_text ?: '-' }}</p>
         <p><strong>Beloning letter:</strong> {{ $quest_step->reward_letter ?: '-' }}</p>
         <p><strong>Beloning verdachte:</strong> {{ $quest_step->reward_suspect_name ?: '-' }}</p>

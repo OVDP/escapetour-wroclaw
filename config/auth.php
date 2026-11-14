@@ -3,6 +3,7 @@
 use App\Models\User;
 
 return [
+    'admin_passphrase' => env('ADMIN_PASSPHRASE', ''),
 
     /*
     |--------------------------------------------------------------------------
